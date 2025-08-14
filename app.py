@@ -43,7 +43,7 @@ def send_template_message(to):
         "type": "template",
         "template": {"name": TEMPLATE_NAME, "language": {"code": TEMPLATE_LANG}}
     }
-    print(f"[ME ➡️ {to}]: Sending {TEMPLATE_NAME}")
+    print(f"[client {to}]: Sending {TEMPLATE_NAME}")
     r = requests.post(url, headers=headers, json=payload)
     print(f"[TEMPLATE RESPONSE] {r.status_code}: {r.text}")
 
@@ -59,7 +59,7 @@ def send_message(to, text):
         "type": "text",
         "text": {"body": text}
     }
-    print(f"[ME ➡️ {to}]: {text}")
+    print(f"[client {to}]: {text}")
     r = requests.post(url, headers=headers, json=payload)
     print(f"[MESSAGE RESPONSE] {r.status_code}: {r.text}")
 
@@ -104,7 +104,7 @@ def process_incoming(data):
 
             if msg["type"] == "text":
                 user_text = msg["text"]["body"]
-                print(f"[THEM ⬅️ {sender}]: {user_text}")
+                print(f"[customer {sender}]: {user_text}")
 
                 # Generate reply from Mistral
                 prompt = f"You are a friendly assistant.\nUser: {user_text}\nAssistant:"
